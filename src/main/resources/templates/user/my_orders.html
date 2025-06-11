@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>My Orders</title>
+	<style>
+		.card-sh {
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+			border-radius: 15px;
+		}
+		th, td {
+			vertical-align: middle !important;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<div class="container-fluid mt-5 p-4">
+			<div class="row">
+				<div class="col-12 text-center mb-3">
+					<h2 class="fw-bold text-primary">📦 My Orders</h2>
+				</div>
+
+				<!-- Success Message -->
+				<th:block th:if="${session.succMsg}">
+					<p class="alert alert-success text-center fw-semibold">
+						[[${session.succMsg}]]
+					</p>
+					<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+				</th:block>
+
+				<!-- Error Message -->
+				<th:block th:if="${session.errorMsg}">
+					<p class="alert alert-danger text-center fw-semibold">
+						[[${session.errorMsg}]]
+					</p>
+					<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+				</th:block>
+
+				<div class="col-md-12">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover text-center align-middle card-sh">
+							<thead class="table-dark">
+								<tr>
+									<th>Sl No.</th>
+									<th>Order ID</th>
+									<th>Date</th>
+									<th>Product</th>
+									<th>Details</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="o,iterStat :${orders}">
+									<td>[[${iterStat .count}]].</td>
+									<td class="fw-medium">[[${o.orderId}]]</td>
+									<td>[[${o.orderDate}]]</td>
+									<td class="fw-semibold text-start ps-4">[[${o.product.title}]]</td>
+									<td class="text-start ps-4">
+										Quantity: <span class="fw-bold">[[${o.quantity}]]</span><br>
+										Price: ₹[[${o.price}]]<br>
+										Total: <span class="text-success fw-bold">₹[[${o.quantity * o.price}]]</span>
+									</td>
+									<td>
+										<span class="badge 
+											" th:classappend="${o.status == 'Cancelled'} ? 'bg-danger' : 'bg-success'">
+											[[${o.status}]]
+										</span>
+									</td>
+									<td>
+										<th:block th:if="${o.status!='Cancelled'}">
+											<a th:href="@{'/user/update-status?id='+${o.id}+'&st=6'}"
+												class="btn btn-sm btn-outline-danger">Cancel</a>
+										</th:block>
+										<th:block th:unless="${o.status!='Cancelled'}">
+											<button class="btn btn-sm btn-danger disabled">Cancelled</button>
+										</th:block>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</body>
+</html>

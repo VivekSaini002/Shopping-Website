@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    .form-label {
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #343a40;
+    }
+    .order-summary {
+      font-size: 16px;
+    }
+    .btn-place-order {
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="container mt-5 p-4">
+      <form action="/user/save-order" method="post" id="orders" novalidate>
+        <div class="row g-4">
+
+          <!-- Billing Address -->
+          <div class="col-md-6">
+            <p class="text-center section-title fs-3">📍 Billing Address</p>
+            <hr>
+
+            <div class="row mb-3">
+              <div class="col p-1">
+                <label class="form-label">First Name</label>
+                <input type="text" name="firstName" required class="form-control">
+              </div>
+              <div class="col p-1">
+                <label class="form-label">Last Name</label>
+                <input type="text" name="lastName" required class="form-control">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col p-1">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" required class="form-control">
+              </div>
+              <div class="col p-1">
+                <label class="form-label">Mobile Number</label>
+                <input type="text" name="mobileNo" required class="form-control">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col p-1">
+                <label class="form-label">Address</label>
+                <input type="text" name="address" required class="form-control">
+              </div>
+              <div class="col p-1">
+                <label class="form-label">City</label>
+                <input type="text" name="city" required class="form-control">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col p-1">
+                <label class="form-label">State</label>
+                <input type="text" name="state" required class="form-control">
+              </div>
+              <div class="col p-1">
+                <label class="form-label">Pincode</label>
+                <input type="number" name="pincode" required class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment & Summary -->
+          <div class="col-md-6">
+            <p class="text-center section-title fs-3">💳 Payment Type</p>
+            <hr>
+
+            <div class="card shadow-sm mb-3">
+              <div class="card-body order-summary">
+                <table class="table table-borderless mb-0">
+                  <tbody>
+                    <tr>
+                      <td>Total price</td>
+                      <td class="text-end">&#8377; [[${orderPrice}]]</td>
+                    </tr>
+                    <tr>
+                      <td>Delivery Fee</td>
+                      <td class="text-end">&#8377; 250</td>
+                    </tr>
+                    <tr>
+                      <td>Tax</td>
+                      <td class="text-end">&#8377; 100</td>
+                    </tr>
+                    <tr class="border-top pt-2 fw-bold">
+                      <td>Total Payable</td>
+                      <td class="text-end text-danger">&#8377; [[${totalOrderPrice}]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card shadow-sm p-3 bg-light">
+              <div class="card-body">
+                <div class="mb-3">
+                  <label class="form-label">Select Payment Method</label>
+                  <select required name="paymentType" class="form-select">
+                    <option value="">-- Select --</option>
+                    <option value="COD">Cash On Delivery</option>
+                    <option value="ONLINE">Online Payment</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-primary btn-place-order w-100">Place Order</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
