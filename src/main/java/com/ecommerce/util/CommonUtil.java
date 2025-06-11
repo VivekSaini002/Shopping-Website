@@ -30,7 +30,7 @@ public class CommonUtil {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		helper.setFrom("sainivivek9758@gmail.com", "Shooping Cart");
+		helper.setFrom("email@gmail.com", "Shooping Cart");
 		helper.setTo(reciepentEmail);
 
 		String content = "<p>Hello,</p>" + "<p>You have requested to reset your password.</p>"
@@ -65,7 +65,7 @@ public class CommonUtil {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		helper.setFrom("sainivivek9758@gmail.com", "Shooping Cart");
+		helper.setFrom("email@gmail.com", "Shooping Cart");
 		helper.setTo(order.getOrderAddress().getEmail());
 
 		msg=msg.replace("[[name]]",order.getOrderAddress().getFirstName());
