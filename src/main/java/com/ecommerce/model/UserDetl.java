@@ -35,7 +35,8 @@ public class UserDetl {
 	private String role;
 	
 	private boolean isEnable;
-	
+
+	Column(value="Locked")
 	private boolean accountNonLocked;
 	
 	private int failedAttempt;
