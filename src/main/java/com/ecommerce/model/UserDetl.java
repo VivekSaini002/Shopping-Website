@@ -2,6 +2,7 @@ package com.ecommerce.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,7 +37,7 @@ public class UserDetl {
 	
 	private boolean isEnable;
 
-	Column(value="Locked")
+	@Column(name="Locked")
 	private boolean accountNonLocked;
 	
 	private int failedAttempt;
