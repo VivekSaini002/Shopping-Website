@@ -70,12 +70,20 @@
 										</span>
 									</td>
 									<td>
-										<th:block th:if="${o.status!='Cancelled'}">
-											<a th:href="@{'/user/update-status?id='+${o.id}+'&st=6'}"
-												class="btn btn-sm btn-outline-danger">Cancel</a>
+										<!-- If status is not Cancelled or Delivered -->
+										<th:block th:if="${o.status != 'Cancelled' and o.status != 'Delivered'}">
+										    <a th:href="@{'/user/update-status?id=' + ${o.id} + '&st=6'}"
+										       class="btn btn-sm btn-outline-danger">Cancel</a>
 										</th:block>
-										<th:block th:unless="${o.status!='Cancelled'}">
-											<button class="btn btn-sm btn-danger disabled">Cancelled</button>
+
+										<!-- If status is Cancelled -->
+										<th:block th:if="${o.status == 'Cancelled'}">
+										    <button class="btn btn-sm btn-danger disabled">Cancelled</button>
+										</th:block>
+
+										<!-- If status is Delivered -->
+										<th:block th:if="${o.status == 'Delivered'}">
+											<button class="btn btn-sm disabled" style="background-color: green; border-color: green;">Delivered</button>
 										</th:block>
 									</td>
 								</tr>
